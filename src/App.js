@@ -7,6 +7,12 @@ class App extends Component {
       deadline: 'December 25, 2017'
     }
   }
+
+  changeDeadline() {
+    this.setState({
+      deadline: 'November 25, 2017'
+    })
+  }
   //static propTypes = {
   //  stringProp: PropTypes.string.isRequired,
   //  arrayProp: PropTypes.array.isRequired, 
@@ -25,7 +31,7 @@ class App extends Component {
         </div>
         <div className="mt2">
           <input type="text" placeholder='new date' /> 
-          <button>Submit</button>
+          <button onClick={() => this.changeDeadline()}>Submit</button>
         </div>
       </div>
     );
