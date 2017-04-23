@@ -1,7 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 
 class App extends Component {
-  // add a constructor for state using 'reactstate'
+  constructor(props) {
+    super(props);
+    this.state = {
+      deadline: 'December 25, 2017'
+    }
+  }
   //static propTypes = {
   //  stringProp: PropTypes.string.isRequired,
   //  arrayProp: PropTypes.array.isRequired, 
@@ -11,7 +16,7 @@ class App extends Component {
   render() {
     return (
       <div className="tc mt6">
-        <div id="App-title" className="f2">Countdown to December 25, 2017</div>
+        <div id="App-title" className="f2">Countdown to {this.state.deadline}</div>
         <div>
           <span className="mh1" id="Clock-days">14 days</span>
           <span className="mh1" id="Clock-hours">30 hours</span>
