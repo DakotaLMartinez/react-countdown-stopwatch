@@ -4,13 +4,14 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      deadline: 'December 25, 2017'
+      deadline: 'December 25, 2017',
+      newDeadline: ''
     }
   }
 
   changeDeadline() {
     this.setState({
-      deadline: 'November 25, 2017'
+      deadline: this.state.newDeadline
     })
   }
   //static propTypes = {
@@ -30,7 +31,10 @@ class App extends Component {
           <span className="mh1" id="Clock-seconds">20 seconds</span>
         </div>
         <div className="mt2">
-          <input type="text" placeholder='new date' /> 
+          <input 
+            type="text" 
+            placeholder='new date'
+            onChange={event => this.setState({newDeadline: event.target.value}) } /> 
           <button onClick={() => this.changeDeadline()}>Submit</button>
         </div>
       </div>
