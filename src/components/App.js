@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import Clock from './Clock';
 
 class App extends Component {
   constructor(props) {
@@ -8,28 +9,24 @@ class App extends Component {
       newDeadline: ''
     }
   }
+  //static propTypes = {
+  //  stringProp: PropTypes.string.isRequired,
+  //  arrayProp: PropTypes.array.isRequired, 
+  //  funcProp: PropTypes.func.isRequired
+  //};
 
   changeDeadline() {
     this.setState({
       deadline: this.state.newDeadline
     })
   }
-  //static propTypes = {
-  //  stringProp: PropTypes.string.isRequired,
-  //  arrayProp: PropTypes.array.isRequired, 
-  //  funcProp: PropTypes.func.isRequired
-  //};
   
   render() {
     return (
       <div className="tc mt6">
         <div id="App-title" className="f2">Countdown to {this.state.deadline}</div>
-        <div>
-          <span className="mh1" id="Clock-days">14 days</span>
-          <span className="mh1" id="Clock-hours">30 hours</span>
-          <span className="mh1" id="Clock-minutes">15 minutes</span>
-          <span className="mh1" id="Clock-seconds">20 seconds</span>
-        </div>
+        <Clock 
+          deadline={this.state.deadline} />
         <div className="mt2">
           <input 
             type="text" 
@@ -46,6 +43,4 @@ class App extends Component {
   //
 //};
 
-// for docs on prop type validations type `reactvalidateproptypedocs`
-
-module.exports = App;
+export default App;
