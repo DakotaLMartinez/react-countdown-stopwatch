@@ -23,16 +23,21 @@ class App extends Component {
   
   render() {
     return (
-      <div className="tc mt6">
+      <div className="tc mt6 ph4">
         <div id="App-title" className="f2">Countdown to {this.state.deadline}</div>
         <Clock 
           deadline={this.state.deadline} />
         <div className="mt2">
           <input 
+            className="ba bw2 b--light-gray br2 pa1 w-100 w-40-ns"
             type="text" 
             placeholder='new date'
             onChange={event => this.setState({newDeadline: event.target.value}) } /> 
-          <button onClick={() => this.changeDeadline()}>Submit</button>
+          <button 
+            className="ba bw2 b--black bg-light-blue w-100 w-auto-ns white pa1 ph2 pointer" 
+            onClick={() => this.changeDeadline()}>
+              Submit
+          </button>
         </div>
       </div>
     );
