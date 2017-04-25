@@ -9,15 +9,9 @@ class App extends Component {
       deadline: 'December 25, 2017',
       newDeadline: '',
       stopwatchActive: false,
-      stopwatchStartTime: null,
-      timeOnStopwatch: 0
+      stopwatchStartTime: null
     }
   }
-  //static propTypes = {
-  //  stringProp: PropTypes.string.isRequired,
-  //  arrayProp: PropTypes.array.isRequired, 
-  //  funcProp: PropTypes.func.isRequired
-  //};
 
   changeDeadline() {
     this.setState({
@@ -28,7 +22,14 @@ class App extends Component {
   toggleStopwatch() {
     this.setState({
       stopwatchActive: !this.state.stopwatchActive,
-      stopwatchStartTime: !this.state.stopwatchActive ? Date.parse(new Date()) : this.state.stopwatchStartTime
+      stopwatchStartTime: !this.state.stopwatchActive ? Date.parse(new Date()) : this.state.stopwatchStartTime,
+    });
+  }
+
+  clearStopwatch() {
+    this.setState({
+      stopwatchActive: false, 
+      stopwatchStartTime: null
     });
   }
   
@@ -51,12 +52,16 @@ class App extends Component {
           </button>
         </div>
         <h2>Stopwatch</h2>
-        <Stopwatch active={this.state.stopwatchActive} startTime={this.state.stopwatchStartTime} />
-        <button
-          className="ba bw2 b--black bg-light-blue w-100 w-auto-ns white pa1 ph2 pointer"
-          onClick={() => this.toggleStopwatch()}>
-          {this.state.stopwatchActive ? 'Stop' : 'Start'}
-        </button>
+        <div className="h2 dib">
+          <button
+            className="ba bw2 b--black bg-light-blue w-100 w-auto-ns white pa1 ph2 pointer ma2"
+            onClick={() => this.toggleStopwatch()}>
+            {this.state.stopwatchActive ? 'Stop' : 'Start'}
+          </button>
+        </div>
+        <div className="h2 dib">
+          <Stopwatch active={this.state.stopwatchActive} startTime={this.state.stopwatchStartTime} reset={this.state.timeOnStopwatch} />
+        </div>
       </div>
     );
   }

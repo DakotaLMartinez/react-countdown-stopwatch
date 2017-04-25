@@ -51,17 +51,31 @@ class Stopwatch extends Component {
     this.state.hours   * 1000 * 60 * 60 + 
     this.state.days    * 1000 * 60 * 60 * 24;
   }
+
+  clearStopwatch() {
+    this.setState({
+      time: 0
+    });
+    this.updateTimes(0);
+  }
   
   render() {
     return (
       <div>
-        <Clock 
-          colonView
-          days={this.state.days}
-          hours={this.state.hours}
-          minutes={this.state.minutes}
-          seconds={this.state.seconds} />
-
+        <div className="dib">
+          <Clock 
+            days={this.state.days}
+            hours={this.state.hours}
+            minutes={this.state.minutes}
+            seconds={this.state.seconds} />
+        </div>
+        <div className="dib">
+          <button
+            className="ba bw2 b--black bg-light-red w-100 w-auto-ns white pa1 ph2 pointer mt2"
+            onClick={() => this.clearStopwatch()}>
+            Clear
+          </button>
+        </div>
       </div>
     );
   }
