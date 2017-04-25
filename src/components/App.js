@@ -1,12 +1,16 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import Countdown from './Countdown';
+import Stopwatch from './Stopwatch';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       deadline: 'December 25, 2017',
-      newDeadline: ''
+      newDeadline: '',
+      stopwatchActive: false,
+      stopwatchStartTime: null,
+      timeOnStopwatch: 0
     }
   }
   //static propTypes = {
@@ -19,6 +23,13 @@ class App extends Component {
     this.setState({
       deadline: this.state.newDeadline
     })
+  }
+
+  toggleStopwatch() {
+    this.setState({
+      stopwatchActive: !this.state.stopwatchActive,
+      stopwatchStartTime: !this.state.stopwatchActive ? Date.parse(new Date()) : this.state.stopwatchStartTime
+    });
   }
   
   render() {
@@ -39,6 +50,13 @@ class App extends Component {
               Submit
           </button>
         </div>
+        <h2>Stopwatch</h2>
+        <Stopwatch active={this.state.stopwatchActive} startTime={this.state.stopwatchStartTime} />
+        <button
+          className="ba bw2 b--black bg-light-blue w-100 w-auto-ns white pa1 ph2 pointer"
+          onClick={() => this.toggleStopwatch()}>
+          {this.state.stopwatchActive ? 'Stop' : 'Start'}
+        </button>
       </div>
     );
   }
