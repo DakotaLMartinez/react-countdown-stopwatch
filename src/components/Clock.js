@@ -1,52 +1,35 @@
 import React, { Component, PropTypes } from 'react';
 
 class Clock extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      days: 0, 
-      hours: 0, 
-      minutes: 0, 
-      seconds: 0
-    }
-  }
+  // add a constructor for state using 'reactstate'
   static propTypes = {
-    deadline: PropTypes.string.isRequired,
+    days: PropTypes.number.isRequired,
+    hours: PropTypes.number.isRequired,
+    minutes: PropTypes.number.isRequired,
+    seconds: PropTypes.number.isRequired
   };
-
-  componentWillMount() {
-    this.getTimeUntil(this.props.deadline);
-  }
-
-  componentDidMount() {
-    this.interval = setInterval(() => this.getTimeUntil(this.props.deadline), 1000);
-  }
 
   leading0(num) {
     return num < 10 ? '0' : num;
-  }
-
-  getTimeUntil(deadline) {
-    const time = Date.parse(deadline) - Date.parse(new Date());
-    const seconds = Math.floor((time/1000) % 60);
-    const minutes = Math.floor((time/1000/60) % 60);
-    const hours   = Math.floor((time/1000/60/60) % 24);
-    const days    = Math.floor((time/1000/60/60/24));
-    this.setState({ days, hours, minutes, seconds });
   }
   
   render() {
     return (
       <div>
-        <span className="mh1" id="Clock-days">   {this.leading0(this.state.days)} days</span>
-        <span className="mh1" id="Clock-hours">  {this.leading0(this.state.hours)} hours</span>
-        <span className="mh1" id="Clock-minutes">{this.leading0(this.state.minutes)} minutes</span>
-        <span className="mh1" id="Clock-seconds">{this.leading0(this.state.seconds)} seconds</span>
+        <span className="mh1" id="Clock-days">   {this.leading0(this.props.days)} days</span>
+        <span className="mh1" id="Clock-hours">  {this.leading0(this.props.hours)} hours</span>
+        <span className="mh1" id="Clock-minutes">{this.leading0(this.props.minutes)} minutes</span>
+        <span className="mh1" id="Clock-seconds">{this.leading0(this.props.seconds)} seconds</span>
       </div>
     );
   }
 }
 
-// for docs on prop type validations type `reactvalidateproptypedocs`
+Clock.defaultProps = {
+  days: 0, 
+  hours: 0, 
+  minutes: 0, 
+  seconds: 0
+};
 
 export default Clock;

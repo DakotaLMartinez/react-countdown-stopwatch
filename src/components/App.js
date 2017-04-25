@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import Clock from './Clock';
+import Countdown from './Countdown';
 
 class App extends Component {
   constructor(props) {
@@ -25,7 +25,7 @@ class App extends Component {
     return (
       <div className="tc mt6 ph4">
         <div id="App-title" className="f2">Countdown to {this.state.deadline}</div>
-        <Clock 
+        <Countdown 
           deadline={this.state.deadline} />
         <div className="mt2">
           <input 
