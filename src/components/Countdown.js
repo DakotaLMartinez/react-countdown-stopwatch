@@ -23,6 +23,11 @@ class Countdown extends Component {
     this.interval = setInterval(() => this.getTimeUntil(this.props.deadline), 1000);
   }
 
+  componentWillUnmount() {
+    // clean up side effects introduced in componentDidMount
+    clearInterval(this.interval);
+  }
+
   getTimeUntil(deadline) {
     const time    = Date.parse(deadline) - Date.parse(new Date());
     const seconds = Math.floor((time/1000) % 60);
@@ -42,7 +47,5 @@ class Countdown extends Component {
     );
   }
 }
-
-// for docs on prop type validations type `reactvalidateproptypedocs`
 
 export default Countdown;
