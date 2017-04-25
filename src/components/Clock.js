@@ -10,7 +10,7 @@ class Clock extends Component {
   };
 
   leading0(num) {
-    return num < 10 ? '0' : num;
+    return num < 10 ? `0${num}` : num;
   }
   
   render() {
