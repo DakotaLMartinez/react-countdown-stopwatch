@@ -38,33 +38,42 @@ describe('Stopwatch', () => {
   });
 
   describe('behavior', () => {
+    let clock, wrapper, toggleButton, clearButton;
+
+    beforeEach(() => {
+      clock         = sinon.useFakeTimers();
+      wrapper       = mount(<Stopwatch/>);
+      toggleButton  = wrapper.find('button#toggle');
+      clearButton   = wrapper.find('button#clear'); 
+    });
     
     it('starts counting when start button is clicked', () => {
-      const clock   = sinon.useFakeTimers();
-      const wrapper = mount(<Stopwatch/>);
-      const button  = wrapper.find('button#toggle');
-      button.simulate('click');
+      toggleButton.simulate('click');
       clock.tick(4000);
       expect(wrapper.state('seconds')).to.equal(4);
     });
 
     it('stops counting when stop button is clicked', () => {
-      const clock   = sinon.useFakeTimers();
-      const wrapper = mount(<Stopwatch/>);
-      const button  = wrapper.find('button#toggle');
-      button.simulate('click');
+      toggleButton.simulate('click');
       clock.tick(4000);
-      button.simulate('click');
+      toggleButton.simulate('click');
       clock.tick(4000);
       expect(wrapper.state('seconds')).to.equal(4);
     });
 
-    it('clears stopwatch when clear button is clicked', () => {
-      const clock   = sinon.useFakeTimers();
-      const wrapper = mount(<Stopwatch active startTime={clock.now} />);
-      const button  = wrapper.find('button#clear'); 
+    it('can continue counting after stop button is clicked', () => {
+      toggleButton.simulate('click');
       clock.tick(4000);
-      button.simulate('click');
+      toggleButton.simulate('click');
+      clock.tick(4000);
+      toggleButton.simulate('click');
+      clock.tick(4000);
+      expect(wrapper.state('seconds')).to.equal(8);
+    });
+
+    it('clears stopwatch when clear button is clicked', () => {
+      clock.tick(4000);
+      clearButton.simulate('click');
       expect(wrapper.state('seconds')).to.equal(0);
     });
   });
