@@ -53,13 +53,6 @@ class App extends Component {
         </div>
         <h2>Stopwatch</h2>
         <div className="h2 dib">
-          <button
-            className="ba bw2 b--black bg-light-blue w-100 w-auto-ns white pa1 ph2 pointer ma2"
-            onClick={() => this.toggleStopwatch()}>
-            {this.state.stopwatchActive ? 'Stop' : 'Start'}
-          </button>
-        </div>
-        <div className="h2 dib">
           <Stopwatch active={this.state.stopwatchActive} startTime={this.state.stopwatchStartTime} reset={this.state.timeOnStopwatch} />
         </div>
       </div>

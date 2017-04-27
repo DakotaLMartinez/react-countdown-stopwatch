@@ -1,10 +1,11 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import Clock from './Clock';
 
 class Stopwatch extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      active: false,
       time: 0,
       days: 0,
       hours: 0, 
@@ -12,24 +13,24 @@ class Stopwatch extends Component {
       seconds: 0,
     }
   }
-  static propTypes = {
-    active: PropTypes.bool.isRequired,
-    startTime: PropTypes.number
-  };
 
   componentWillMount() {
     this.updateTimes(this.state.time);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if(nextProps.active) {
-      this.interval = setInterval(() => this.getTimeElapsed(this.props.startTime), 100);
-    } else {
+  toggleStopwatch() {
+    if(this.state.active) {
       clearInterval(this.interval);
       this.setState({
         time: this.convertCurrentTimeToMilliseconds()
-      })
+      });
+    } else {
+      const now = Date.parse(new Date());
+      this.interval = setInterval(() => this.getTimeElapsed(now), 1000); 
     }
+    this.setState({
+      active: !this.state.active
+    });
   }
 
   getTimeElapsed(startTime) {
@@ -63,6 +64,14 @@ class Stopwatch extends Component {
     return (
       <div>
         <div className="dib">
+          <button
+            id="toggle"
+            className="ba bw2 b--black bg-light-blue w-100 w-auto-ns white pa1 ph2 pointer ma2"
+            onClick={() => this.toggleStopwatch()}>
+            {this.state.active ? 'Stop' : 'Start'}
+          </button>
+        </div>
+        <div className="dib">
           <Clock 
             days={this.state.days}
             hours={this.state.hours}
@@ -71,6 +80,7 @@ class Stopwatch extends Component {
         </div>
         <div className="dib">
           <button
+            id="clear"
             className="ba bw2 b--black bg-light-red w-100 w-auto-ns white pa1 ph2 pointer mt2"
             onClick={() => this.clearStopwatch()}>
             Clear
@@ -80,9 +90,5 @@ class Stopwatch extends Component {
     );
   }
 }
-
-Stopwatch.defaultProps = {
-  startTime: Date.parse(new Date())
-};
 
 export default Stopwatch;
