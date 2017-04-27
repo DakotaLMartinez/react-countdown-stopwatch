@@ -54,8 +54,10 @@ class Stopwatch extends Component {
   }
 
   clearStopwatch() {
+    clearInterval(this.interval);
     this.setState({
-      time: 0
+      time: 0,
+      active: false
     });
     this.updateTimes(0);
   }

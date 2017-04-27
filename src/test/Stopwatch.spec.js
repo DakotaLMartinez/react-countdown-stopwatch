@@ -76,6 +76,26 @@ describe('Stopwatch', () => {
       clearButton.simulate('click');
       expect(wrapper.state('seconds')).to.equal(0);
     });
+
+    describe('while counting', () => {
+      beforeEach(() => {
+        toggleButton.simulate('click');
+        clock.tick(4000);
+      });
+      
+      it('clearing the stopwatch stops the counting', () => {
+        clearButton.simulate('click');
+        clock.tick(4000);
+        expect(wrapper.state().seconds).to.equal(0);
+      });
+
+      it('clearing the stopwatch sets button text back to Start', () => {
+        clearButton.simulate('click');
+        expect(toggleButton.text()).to.equal('Start');
+      });
+      
+    });
+
   });
   
 });
