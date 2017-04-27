@@ -39,7 +39,7 @@ class App extends Component {
         </div>
         <h2>Stopwatch</h2>
         <div className="h2 dib">
-          <Stopwatch active={this.state.stopwatchActive} startTime={this.state.stopwatchStartTime} reset={this.state.timeOnStopwatch} />
+          <Stopwatch />
         </div>
       </div>
     );
