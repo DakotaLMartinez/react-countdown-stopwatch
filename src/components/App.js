@@ -18,20 +18,6 @@ class App extends Component {
       deadline: this.state.newDeadline
     })
   }
-
-  toggleStopwatch() {
-    this.setState({
-      stopwatchActive: !this.state.stopwatchActive,
-      stopwatchStartTime: !this.state.stopwatchActive ? Date.parse(new Date()) : this.state.stopwatchStartTime,
-    });
-  }
-
-  clearStopwatch() {
-    this.setState({
-      stopwatchActive: false, 
-      stopwatchStartTime: null
-    });
-  }
   
   render() {
     return (
@@ -59,9 +45,5 @@ class App extends Component {
     );
   }
 }
-
-//App.defaultProps = {
-  //
-//};
 
 export default App;
